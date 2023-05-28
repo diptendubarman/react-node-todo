@@ -1,4 +1,4 @@
-# magicmind
+# Magicmind-Todo
 A Todo Application
 @author Diptendu Barman
 
