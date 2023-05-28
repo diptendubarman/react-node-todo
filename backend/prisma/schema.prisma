@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id         BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  name       String   @db.VarChar(100)
+  email      String   @db.VarChar(100)
+  password   String
+  created_at DateTime @default(now()) @db.DateTime(0)
+  updated_at DateTime @default(now()) @updatedAt @db.DateTime(0)
+  todos      todos[]
+}
+
+model todos {
+  id         BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  user_id    BigInt?  @db.UnsignedBigInt
+  title      String   @db.VarChar(255)
+  created_at DateTime @default(now()) @db.DateTime(0)
+  updated_at DateTime @default(now()) @updatedAt @db.DateTime(0)
+  user       users?   @relation(fields: [user_id], references: [id])
+
+  @@index([user_id], map: "todos_user_id_fkey")
+}
+
