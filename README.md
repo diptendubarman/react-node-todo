@@ -4,7 +4,7 @@ A Todo Application
 
 ## Getting Started
 
-Run these command for running the application:
+Run the following commands to start the application:
 
 ```bash
 npm install
