@@ -1,19 +1,21 @@
-const path = require("path");
-const router = require("express").Router();
+const {join} = require("path");
+const { Router } = require("express");
 require("express-group-routes");
-// middlewares for protected routes
-const verifyToken = require(path.join(process.cwd(), "middlewares/auth.js"));
-// controllers
-const AuthController = require(path.join(
-  process.cwd(),
-  "controllers/auth.controller.js"
-));
-const TodoController = require(path.join(
-  process.cwd(),
-  "controllers/todo.controller.js"
-));
 
-// Geust routes (no need to verify token)
+// Set up base path for controllers and middleware
+const basePath = process.cwd();
+
+// Import middleware for protected routes
+const verifyToken = require(join(basePath, "middlewares/auth.js"));
+
+// Import controllers
+const AuthController = require(join(basePath, "controllers/auth.controller.js"));
+const TodoController = require(join(basePath, "controllers/todo.controller.js"));
+
+// Create an Express router
+const router = Router();
+
+// Guest routes (no need to verify token)
 router.group((r) => {
   r.post("/login", AuthController.login);
   r.post("/registration", AuthController.registration);
