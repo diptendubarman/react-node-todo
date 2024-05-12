@@ -1,4 +1,4 @@
-# Magicmind-Todo
+# React-Node-Todo
 A Todo Application
 @author Diptendu Barman
 
